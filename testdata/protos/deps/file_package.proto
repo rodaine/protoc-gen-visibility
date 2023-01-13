@@ -1,0 +1,15 @@
+syntax="proto3";
+
+package deps;
+
+import "visibility/v1/visibility.proto";
+import "testdata/protos/deps/file_subpackages.proto";
+
+option go_package = "protos/deps";
+option (visibility.v1.file_rules).mode = MODE_PACKAGE;
+
+message FilePackageMsg {
+  FileSubpackagesEnum msg = 1;
+}
+
+enum FilePackageEnum { FILE_PACKAGE_ENUM = 0; }

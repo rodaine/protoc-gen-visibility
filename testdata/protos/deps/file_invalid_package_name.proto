@@ -1,0 +1,13 @@
+syntax="proto3";
+
+package deps;
+
+import "visibility/v1/visibility.proto";
+
+option go_package = "protos/deps";
+option (visibility.v1.file_rules) = {
+  mode: MODE_FILE,
+  packages: ["<invalid package name>"]
+};
+
+message InvalidModeMsg {}

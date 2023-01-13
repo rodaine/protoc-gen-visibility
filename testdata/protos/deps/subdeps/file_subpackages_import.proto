@@ -1,0 +1,11 @@
+syntax="proto3";
+
+package deps.subdeps;
+option go_package = "protos/deps/subdeps";
+
+import "testdata/protos/deps/file_subpackages.proto";
+
+message FileSubpackagesMsg {
+  FileSubpackagesMsg msg = 1;
+  FileSubpackagesEnum enum = 2;
+}

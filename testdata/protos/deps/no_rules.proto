@@ -1,0 +1,14 @@
+syntax="proto3";
+
+package deps;
+
+option go_package = "protos/deps";
+
+enum NoRulesEnum {
+  NO_RULES_ENUM = 0;
+}
+
+message NoRulesMsg {
+  message NoRulesNestedMsg {}
+  enum NoRulesNestedEnum { NO_RULES_NESTED_ENUM = 0; }
+}

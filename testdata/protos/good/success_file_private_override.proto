@@ -1,0 +1,11 @@
+syntax="proto3";
+
+package good;
+option go_package = "protos/good";
+
+import "testdata/protos/deps/file_private_good_package.proto";
+
+message FilePrivateWithOverride {
+  deps.FilePrivateMsg should_not_fail = 1;
+  deps.FilePrivateEnum also_not_fail = 2;
+}

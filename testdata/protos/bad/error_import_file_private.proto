@@ -1,0 +1,16 @@
+syntax="proto3";
+
+package bad;
+option go_package = "protos/bad";
+
+import "testdata/protos/deps/file_private_good_package.proto";
+
+message BadPackageMessage {
+  deps.FilePrivateMsg should_fail = 1;
+  deps.FilePrivateEnum also_fail = 2;
+}
+
+service BadPackageService {
+  rpc BadInput(deps.FilePrivateMsg) returns (BadPackageMessage);
+  rpc BadOutput(BadPackageMessage) returns (deps.FilePrivateMsg);
+}

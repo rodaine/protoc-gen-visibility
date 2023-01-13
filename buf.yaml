@@ -1,0 +1,11 @@
+version: v1
+name: buf.build/rodaine/protoc-gen-visibility
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+build:
+  excludes:
+    - testdata

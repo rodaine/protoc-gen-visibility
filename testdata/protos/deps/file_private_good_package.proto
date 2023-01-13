@@ -1,0 +1,17 @@
+syntax="proto3";
+
+package deps;
+option go_package = "protos/deps";
+
+import "visibility/v1/visibility.proto";
+
+option (visibility.v1.file_rules) = {
+  mode: MODE_FILE,
+  packages: ["good"],
+};
+
+message FilePrivateMsg {
+  FilePrivateEnum x = 1;
+}
+
+enum FilePrivateEnum { FILE_PRIVATE_ENUM = 0; }

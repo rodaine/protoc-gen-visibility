@@ -1,0 +1,12 @@
+syntax="proto3";
+
+package bad;
+
+import "testdata/protos/deps/file_subpackages.proto";
+
+option go_package = "protos/bad";
+
+message BadSubpackageMessage {
+  deps.FileSubpackagesMsg should_fail = 1;
+  deps.FileSubpackagesEnum also_fail = 2;
+}

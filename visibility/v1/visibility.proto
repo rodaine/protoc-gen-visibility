@@ -1,0 +1,63 @@
+syntax="proto3";
+
+// Package visibility provides options for specifying visibility rules for
+// Protocol Buffer entities. These rules are not inherently enforced by protoc,
+// but can be referenced via static analysis to ensure they are adhered to.
+// protoc-gen-visibility provides a reference implementation of such a tool.
+package visibility.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/rodaine/protoc-gen-visibility/visibility/v1;visibility";
+
+// Mode controls what may depend on a particular entity.
+enum Mode {
+  // MODE_UNSPECIFIED defaults to MODE_PUBLIC.
+  MODE_UNSPECIFIED = 0;
+
+  // MODE_PUBLIC is the default visibility of entities. Any other entity may
+  // import and use this entity.
+  MODE_PUBLIC = 1;
+
+  // MODE_SUBPACKAGES limits visibility of the entity to its package and any
+  // subpackages thereof. Permissions may be expanded in the Specification.
+  MODE_SUBPACKAGES = 2;
+
+  // MODE_PACKAGE limits direct visibility of the entity to its package,
+  // exclusively. Permissions may be expanded in the Specification.
+  MODE_PACKAGE = 3;
+
+  // MODE_FILE mode limits direct visibility of the entity to its containing file,
+  // exclusively. Permissions may be expanded in the Specification.
+  MODE_FILE = 4;
+}
+
+// Specification describes the visibility rules that govern an entity.
+// Specifications are inherited from parent entities unless overridden.
+message Specification {
+  // Mode applies the general visibility rule for this entity.
+  Mode mode = 1;
+
+  // Packages are package names that can explicitly access this entity. A
+  // package name suffixed with '.*' will include that package and any
+  // subpackages.
+  repeated string packages = 2;
+}
+
+extend google.protobuf.FileOptions {
+  // FileRules defines the visibility Specification for the entire file. All
+  // entities in the file inherit these rules unless otherwise specified.
+  Specification file_rules = 128064; // 👀
+}
+
+extend google.protobuf.MessageOptions {
+  // MessageRules defines the visibility Specification for a message. All
+  // messages or enums nested in the message inherit these rules unless
+  // otherwise specified.
+  Specification message_rules = 128064; // 👀
+}
+
+extend google.protobuf.EnumOptions {
+  // EnumRules defines the visibility Specification for an enum.
+  Specification enum_rules = 128064; // 👀
+}

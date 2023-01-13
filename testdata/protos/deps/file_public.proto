@@ -1,0 +1,13 @@
+syntax="proto3";
+
+package deps;
+
+import "visibility/v1/visibility.proto";
+import "testdata/protos/deps/no_rules.proto";
+
+option go_package = "protos/deps";
+option (visibility.v1.file_rules).mode = MODE_PUBLIC;
+
+message FilePublicMessage {
+  NoRulesMsg msg = 1;
+}

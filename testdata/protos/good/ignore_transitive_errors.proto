@@ -1,0 +1,11 @@
+syntax="proto3";
+
+package good;
+
+import "testdata/protos/bad/error_import_package_private.proto";
+
+option go_package = "protos/good";
+
+message TransitiveError {
+  bad.BadPackageMessage should_not_fail = 1;
+}
